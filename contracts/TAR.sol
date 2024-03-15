@@ -13,14 +13,14 @@ contract TAR is ITAR, Ownable {
 
     uint256 private _nextVersionId;
 
-    string private _baseURI;
-    string private _postfix;
+    string private _uriPrefix;
+    string private _uriPostfix;
     
     mapping(uint256 => string) private _checksums;
 
-    constructor(address initialOwner, string memory baseURI, string memory postfix) Ownable(initialOwner) {
-        _baseURI = baseURI;
-        _postfix = postfix;
+    constructor(address initialOwner, string memory uriPrefix, string memory uriPostfix) Ownable(initialOwner) {
+        _uriPrefix = uriPrefix;
+        _uriPostfix = uriPostfix;
     }
 
     function push(string memory checksum_) public override virtual onlyOwner {
@@ -39,13 +39,13 @@ contract TAR is ITAR, Ownable {
     }
 
     function checksum(uint256 version) public override virtual view returns (string memory) {
-        require(exists(version), "ITAR: version does not exist");
+        require(exists(version), "TAR: version does not exist");
         return _checksums[version];
     }
 
     function dataUri(uint256 version) public override virtual view returns (string memory) {
-        require(exists(version), "ITAR: version does not exist");
-        return string.concat(_baseURI, "/", Strings.toHexString(address(this)), "/", version.toString(), _postfix);
+        require(exists(version), "TAR: version does not exist");
+        return string.concat(_uriPrefix, "/", Strings.toHexString(address(this)), "/", version.toString(), _uriPostfix);
     }
 
 }
