@@ -1,0 +1,21 @@
+{
+  "name": "adh-mggovgr-dcap-tar",
+  "scripts": {
+    "build": "hardhat compile",
+    "clean": "hardhat clean",
+    "deploy": "thirdweb deploy",
+    "json:canonicalize": "canonicalize"
+  },
+  "bin": {
+    "canonicalize": "scripts/canonicalize.js"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.1",
+    "thirdweb": "^0.13.51"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.2",
+    "canonicalize": "^2.0.0"
+  }
+}
