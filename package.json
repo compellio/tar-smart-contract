@@ -3,7 +3,9 @@
   "scripts": {
     "build": "hardhat compile",
     "clean": "hardhat clean",
-    "deploy": "thirdweb deploy --contract TAR",
+    "deploy": "hardhat deploy",
+    "node": "hardhat node",
+    "node:blank": "hardhat node --no-deploy",
     "json:canonicalize": "canonicalize"
   },
   "bin": {
@@ -16,7 +18,9 @@
     "@types/mocha": "^10.0.7",
     "@types/node": "^20.14.10",
     "chai": "^4.4.1",
+    "dotenv": "^16.4.5",
     "hardhat": "^2.22.6",
+    "hardhat-deploy": "^0.12.4",
     "thirdweb": "^0.13.56",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
