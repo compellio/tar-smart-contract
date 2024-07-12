@@ -23,17 +23,6 @@ const config: HardhatUserConfig & AdHocTarConfig = {
             live: false,
             saveDeployments: false,
             tags: ["test", "local"]
-        },
-        "nethereum-testchain": {
-            live: false,
-            saveDeployments: false,
-            url: "http://testchain.nethereum.com:8545/",
-            accounts: [
-                // Ignoring ADHOC_TAR_DEPLOYER_KEY setting and using common key
-                // See https://docs.nethereum.com/en/latest/nethereum-gettingstarted-smartcontracts-untyped/#instantiating-web3-and-the-account
-                "0x7580e7fb49df1c861f0050fae31c2224c6aba908e116b8da44ee8cd927b990b0",
-            ],
-            tags: ["test"]
         }
     },
     tar: {
