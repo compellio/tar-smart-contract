@@ -66,10 +66,17 @@ const config: HardhatUserConfig & AdHocTarConfig = {
             tags: ["local"],
             ...sharedNetworkConfig,
         },
-        hardhat: {
-            live: false,
-            saveDeployments: false,
-            tags: ["test", "local"]
+        sepolia: {
+            url: "https://ethereum-sepolia-rpc.publicnode.com",
+            chainId: 11155111,
+            tags: ["test"],
+            ...sharedNetworkConfig,
+        },
+        amoy: {
+            url: "https://polygon-amoy-bor-rpc.publicnode.com",
+            chainId: 80002,
+            tags: ["test"],
+            ...sharedNetworkConfig,
         }
     },
     tar: {
