@@ -72,7 +72,7 @@ npm run clean
 
 ### JSON Canonicalization
 
-To retrieve the canonical representation of a JSON string (as defined in [https://www.rfc-editor.org/rfc/rfc8785.html](RFC8785)), run either of the following (the script accepts JSON strings in stdin):
+To retrieve the canonical representation of a JSON string (as defined in [RFC8785](https://www.rfc-editor.org/rfc/rfc8785.html)), run either of the following (the script accepts JSON strings in stdin):
 
 ```shell
 npx canonicalize < filename.json
