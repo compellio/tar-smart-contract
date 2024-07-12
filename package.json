@@ -3,9 +3,9 @@
   "scripts": {
     "build": "hardhat compile",
     "clean": "hardhat clean",
-    "deploy": "hardhat deploy",
     "node": "hardhat node",
     "node:blank": "hardhat node --no-deploy",
+    "deploy": "hardhat deploy",
     "json:canonicalize": "canonicalize"
   },
   "bin": {
@@ -17,12 +17,14 @@
     "@types/chai": "^4.3.16",
     "@types/mocha": "^10.0.7",
     "@types/node": "^20.14.10",
+    "@types/yargs": "^17.0.32",
     "chai": "^4.4.1",
     "dotenv": "^16.4.5",
     "hardhat": "^2.22.6",
     "hardhat-deploy": "^0.12.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.3",
+    "yargs": "^17.7.2"
   },
   "dependencies": {
     "canonicalize": "^2.0.0"
