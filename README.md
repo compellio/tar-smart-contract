@@ -1,6 +1,10 @@
 # TAR Smart Contracts
 
+This project is an early implementation of Solidity smart contracts representing Tokenized Asset Records (TARs) as defined in the [draft-avrilionis-satp-asset-schema-architecture](https://datatracker.ietf.org/doc/draft-avrilionis-satp-asset-schema-architecture) Internet Draft.
 
+The [`ITAR`](./contracts/ITAR.sol) contract interface aims to define the standard interface a TAR-compatible contract needs to implement to interact with other components under the Asset Schema Architecture for Asset Exchange, namely, versioned persistence, tokenization and checksum-per-version, for validating a TAR's authenticity on-chain.
+
+The [`TAR`](./contracts/TAR.sol) contract provides an early reference implementation of the `ITAR` interface.
 
 ## Usage
 
@@ -118,7 +122,7 @@ To deploy an instance of a TAR contract, run:
 npm run deploy <network>
 ```
 
-using any of the following networks: `hardhat`, `localhost`, or any network listed in the [pre-configured public networks](#pre-configured-public-networks).
+using any of the following networks: `hardhat`, `localhost`, or any network listed in the [pre-configured public networks](#pre-configured-public-networks) table.
 
 If `ADHOC_TAR_SAVE_DEPLOYMENT` is set to true during the deployment, the deployment workflow will save the deployment artefacts in the `deployments/` directory. If you plan to verify your deployed contract, set this environment variable to true.
 
@@ -155,6 +159,6 @@ npm run verify:etherscan <network>
 
 ## About
 
-<img src="./assets/images/ngi-search.png" height="40">
+<img src="./assets/images/ngi-search.png" height="40" alt="NGI Search">
 
 Funded by the European Union. Views and opinions expressed are those of the author(s) only and don’t necessarily reflect those of the European Union or European Commission. Neither the European Union nor the granting authority can be held responsible for them. Funded within the framework of the [NGI Search project](https://www.ngisearch.eu/) under grant agreement No 101069364.
