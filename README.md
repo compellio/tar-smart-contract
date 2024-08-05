@@ -1,8 +1,6 @@
-# Ad-Hoc TAR Toolkit
+# TAR Smart Contracts
 
-This project provides various tools (smart contracts and scripts) for manually creating, deploying and hosting Token Asset Records for various types of content and is intended to be used for demonstration purposes only.
 
-Given the nature of this project, the usual quality and safety rules are not being applied (no tests, etc.). The contracts are not upgradeable, and the configuration may fail over time.
 
 ## Usage
 
@@ -13,6 +11,7 @@ git clone https://github.com/compellio/adhoc-tar-toolkit
 nvm install && nvm use
 npm ci
 ```
+
 If you don't have NVM installed (see https://github.com/nvm-sh/nvm), make sure you are on Node v20.x to run the commands below.
 
 Continue reading the [Environment Variables](#environment-variables) section to configure your installation as needed.
@@ -25,20 +24,25 @@ Command line environment variables take precedence over variables defined in the
 
 The following variables affect the deployed TAR contract:
 
-- `ADHOC_TAR_OWNER=<eaddress|int>` the account address to assign as the TAR owner (required). If set to `0`, the deployer account will be assigned
-- `ADHOC_TAR_DEPLOYER_KEY=<private key>` the private key used to deploy the TAR contract (required for live networks). This variable will be ignored when using the Hardhat network.
-- `ADHOC_TAR_URL_PREFIX=<string>` the beginning of a URI used to generate TAR data URIs (required, e.g.: `https://example.org/asset`). The URL must not contain trailing slashes.
-- `ADHOC_TAR_URL_POSTFIX=<string|null>` a string to append to the TAR data URI (optional - defaults to an empty string, e.g.: `.json`).
+- `ADHOC_TAR_OWNER=<address|int>` the account address to assign as the TAR owner (required). If set to `0`, the deployer account will be assigned as the owner.
+- `ADHOC_TAR_URI_PREFIX=<string>` the beginning of a URI used to generate TAR data URIs (required, e.g.: `https://example.org/asset`). The URL mustn’t contain trailing slashes.
+- `ADHOC_TAR_URI_POSTFIX=<string|null>` a string to append to the TAR data URI (optional - defaults to an empty string, e.g.: `.json`).
 
-More details about `ADHOC_TAR_URL_PREFIX` and `ADHOC_TAR_URL_POSTFIX` can be found in the [Deployment](#deployment) section.
+The TAR contract will use `ADHOC_TAR_URI_PREFIX` and `ADHOC_TAR_URI_POSTFIX` to produce the following data URI for each version it stores:
 
-The following variables are optional and only affect the contract deployment.
+```
+{ADHOC_TAR_URI_PREFIX}/{TAR contract address}/{TAR version}{?ADHOC_TAR_URI_POSTFIX}
+```
 
-- `ADHOC_TAR_JSON_RPC_URL=<string>` overrides the preset JSON-RPC endpoint of the target network during deployment (optional). The JSON-RPC endpoint must match the selected deployment network. The variable defaults to a preset endpoint for the selected deployment network.
+The data URI should point to a canonicalized version of the TAR payload that corresponds to the TAR checksum of the selected version. More details on canonicalizing TAR payloads can be found in the [JSON Canonicalization](#json-canonicalization) section.
+
+The following variables are optional and only affect the contract deployment workflow.
+
+- `ADHOC_TAR_DEPLOYER_KEY=<private key>` the private key used to deploy the TAR contract (required for live networks). This variable is ignored when using the Hardhat network.
+- `ADHOC_TAR_JSON_RPC_URL=<string>` can be set to deploy the contract on a custom network (optional).
 - `ADHOC_TAR_SAVE_DEPLOYMENT=<"true"|"false">` when set to true, the `hardhat-deploy` package will save the deployment details in the `deployments/` directory (optional - defaults to `false`).
-
-> [!NOTE]
-> At this time, it is recommended that you set `ADHOC_TAR_SAVE_DEPLOYMENT` to the default `false`.
+- `ADHOC_TAR_ETHERSCAN_API_KEY=<string>` an Etherscan, or Etherscan-like explorer, API key to use when verifying deployed contracts (optional).
+- `ADHOC_TAR_ETHERSCAN_URL=<string>` the URL to an Etherscan-like explorer (optional - defaults to the Ethereum mainnet Etherscan).
 
 More details about these variables and their behaviour can be found in the [Deployment](#deployment) section.
 
@@ -72,21 +76,79 @@ npm run clean
 
 ### JSON Canonicalization
 
-To retrieve the canonical representation of a JSON string (as defined in [RFC8785](https://www.rfc-editor.org/rfc/rfc8785.html)), run either of the following (the script accepts JSON strings in stdin):
+This project provides a simple executable script for getting the canonical representation of arbitrary JSON strings, as defined in [RFC 8785](https://www.rfc-editor.org/rfc/rfc8785.html).
+
+To get the canonical representation of a JSON string, run either of the following commands:
 
 ```shell
 npx json-canonicalize < filename.json
 cat filename.json | npx json-canonicalize
 ```
 
-Once canonicalized, you can generate a hash using `shasum` or other similar hashing commands. For example, to generate a SHA256 hash for a canonicalized JSON file, you can run:
+The command reads a single JSON string from the standard input (stdin) and prints its canonical representation in the standard output (stdout).
+
+Once in canonical form, you may generate its checksum using `shasum` or other similar hashing commands. For example, to canonicalize and generate a SHA256 hash of an arbitrary JSON file, you may run:
 
 ```shell
 cat ./path/to/filename.json | npx json-canonicalize | shasum -a 256
 ```
 
-The output can be used to create versions with the deployed smart contract.
+The checksum can be used to create versions on a deployed TAR smart contract.
 
 #### Caveats
 
-The JSON canonicalization command does not support JSON strings containing control characters in their values (e.g. new line, tabs, etc.).
+The JSON canonicalization command does not support JSON strings containing control characters (e.g. new line, tabs, etc.).
+
+### Deployment
+
+This will deploy an instance of the TAR smart contract non-deterministically.
+
+Preparation:
+
+- Set the `ADHOC_TAR_DEPLOYER_KEY` variable in `.env`
+- Set the `ADHOC_TAR_URI_PREFIX`, `ADHOC_TAR_URI_POSTFIX` and `ADHOC_TAR_OWNER` parameters as appropriate for your setup.
+
+We recommend that you test your deployment configuration on the Hardhat or another local network before moving on to a live network.
+
+Make sure the account set in `ADHOC_TAR_DEPLOYER_KEY` is sufficiently funded to pay for the deployment transaction's gas fees.
+
+To deploy an instance of a TAR contract, run:
+
+```shell
+npm run deploy <network>
+```
+
+using any of the following networks: `hardhat`, `localhost`, or any network listed in the [pre-configured public networks](#pre-configured-public-networks).
+
+If `ADHOC_TAR_SAVE_DEPLOYMENT` is set to true during the deployment, the deployment workflow will save the deployment artefacts in the `deployments/` directory. If you plan to verify your deployed contract, set this environment variable to true.
+
+To override existing deployment artefacts to deploy a fresh TAR contract, run:
+
+```shell
+npm run deploy:fresh <network>
+```
+
+#### Pre-configured Public Networks
+
+| Id          | Network   | Type           | JSON-RPC                                    |
+|:------------|:----------|:---------------|:--------------------------------------------|
+| `sepolia`   | Sepolia   | Public Testnet | https://ethereum-sepolia-rpc.publicnode.com |
+| `amoy`      | Amoy      | Public Testnet | https://polygon-amoy-bor-rpc.publicnode.com |
+
+You may also connect to ant EVM-compatible network by setting the `ADHOC_TAR_JSON_RPC_URL` environment variable and using the `custom` network id during deployment.
+
+### Contract Verification
+
+Deployed contracts are not automatically verified during deployment.
+
+To verify a contract with Sourcify, run:
+
+```shell
+npm run verify:sourcify <network>
+```
+
+To verify a contract with Etherscan, or Etherscan-like explorer, set the `ADHOC_TAR_ETHERSCAN_API_KEY` and `ADHOC_TAR_ETHERSCAN_URL` environment variables as appropriate, and run:
+
+```shell
+npm run verify:etherscan <network>
+```
