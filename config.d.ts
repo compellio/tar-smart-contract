@@ -1,4 +1,4 @@
-interface AdHocTarConfig {
+interface TarConfig {
     tar: {
         prefix: string;
         postfix?: string;

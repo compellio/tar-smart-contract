@@ -28,25 +28,25 @@ Command line environment variables take precedence over variables defined in the
 
 The following variables affect the deployed TAR contract:
 
-- `ADHOC_TAR_OWNER=<address|int>` the account address to assign as the TAR owner (required). If set to `0`, the deployer account will be assigned as the owner.
-- `ADHOC_TAR_URI_PREFIX=<string>` the beginning of a URI used to generate TAR data URIs (required, e.g.: `https://example.org/asset`). The URL mustn’t contain trailing slashes.
-- `ADHOC_TAR_URI_POSTFIX=<string|null>` a string to append to the TAR data URI (optional - defaults to an empty string, e.g.: `.json`).
+- `TAR_OWNER=<address|int>` the account address to assign as the TAR owner (required). If set to `0`, the deployer account will be assigned as the owner.
+- `TAR_URI_PREFIX=<string>` the beginning of a URI used to generate TAR data URIs (required, e.g.: `https://example.org/asset`). The URL mustn’t contain trailing slashes.
+- `TAR_URI_POSTFIX=<string|null>` a string to append to the TAR data URI (optional - defaults to an empty string, e.g.: `.json`).
 
-The TAR contract will use `ADHOC_TAR_URI_PREFIX` and `ADHOC_TAR_URI_POSTFIX` to produce the following data URI for each version it stores:
+The TAR contract will use `TAR_URI_PREFIX` and `TAR_URI_POSTFIX` to produce the following data URI for each version it stores:
 
 ```
-{ADHOC_TAR_URI_PREFIX}/{TAR contract address}/{TAR version}{?ADHOC_TAR_URI_POSTFIX}
+{TAR_URI_PREFIX}/{TAR contract address}/{TAR version}{?TAR_URI_POSTFIX}
 ```
 
 The data URI should point to a canonicalized version of the TAR payload that corresponds to the TAR checksum of the selected version. More details on canonicalizing TAR payloads can be found in the [JSON Canonicalization](#json-canonicalization) section.
 
 The following variables are optional and only affect the contract deployment workflow.
 
-- `ADHOC_TAR_DEPLOYER_KEY=<private key>` the private key used to deploy the TAR contract (required for live networks). This variable is ignored when using the Hardhat network.
-- `ADHOC_TAR_JSON_RPC_URL=<string>` can be set to deploy the contract on a custom network (optional).
-- `ADHOC_TAR_SAVE_DEPLOYMENT=<"true"|"false">` when set to true, the `hardhat-deploy` package will save the deployment details in the `deployments/` directory (optional - defaults to `false`).
-- `ADHOC_TAR_ETHERSCAN_API_KEY=<string>` an Etherscan, or Etherscan-like explorer, API key to use when verifying deployed contracts (optional).
-- `ADHOC_TAR_ETHERSCAN_URL=<string>` the URL to an Etherscan-like explorer (optional - defaults to the Ethereum mainnet Etherscan).
+- `TAR_DEPLOYER_KEY=<private key>` the private key used to deploy the TAR contract (required for live networks). This variable is ignored when using the Hardhat network.
+- `TAR_JSON_RPC_URL=<string>` can be set to deploy the contract on a custom network (optional).
+- `TAR_SAVE_DEPLOYMENT=<"true"|"false">` when set to true, the `hardhat-deploy` package will save the deployment details in the `deployments/` directory (optional - defaults to `false`).
+- `TAR_ETHERSCAN_API_KEY=<string>` an Etherscan, or Etherscan-like explorer, API key to use when verifying deployed contracts (optional).
+- `TAR_ETHERSCAN_URL=<string>` the URL to an Etherscan-like explorer (optional - defaults to the Ethereum mainnet Etherscan).
 
 More details about these variables and their behaviour can be found in the [Deployment](#deployment) section.
 
@@ -109,12 +109,12 @@ This will deploy an instance of the TAR smart contract non-deterministically.
 
 Preparation:
 
-- Set the `ADHOC_TAR_DEPLOYER_KEY` variable in `.env`
-- Set the `ADHOC_TAR_URI_PREFIX`, `ADHOC_TAR_URI_POSTFIX` and `ADHOC_TAR_OWNER` parameters as appropriate for your setup.
+- Set the `TAR_DEPLOYER_KEY` variable in `.env`
+- Set the `TAR_URI_PREFIX`, `TAR_URI_POSTFIX` and `TAR_OWNER` parameters as appropriate for your setup.
 
 We recommend that you test your deployment configuration on the Hardhat or another local network before moving on to a live network.
 
-Make sure the account set in `ADHOC_TAR_DEPLOYER_KEY` is sufficiently funded to pay for the deployment transaction's gas fees.
+Make sure the account set in `TAR_DEPLOYER_KEY` is sufficiently funded to pay for the deployment transaction's gas fees.
 
 To deploy an instance of a TAR contract, run:
 
@@ -124,7 +124,7 @@ npm run deploy <network>
 
 using any of the following networks: `hardhat`, `localhost`, or any network listed in the [pre-configured public networks](#pre-configured-public-networks) table.
 
-If `ADHOC_TAR_SAVE_DEPLOYMENT` is set to true during the deployment, the deployment workflow will save the deployment artefacts in the `deployments/` directory. If you plan to verify your deployed contract, set this environment variable to true.
+If `TAR_SAVE_DEPLOYMENT` is set to true during the deployment, the deployment workflow will save the deployment artefacts in the `deployments/` directory. If you plan to verify your deployed contract, set this environment variable to true.
 
 To override existing deployment artefacts to deploy a fresh TAR contract, run:
 
@@ -139,7 +139,7 @@ npm run deploy:fresh <network>
 | `sepolia`   | Sepolia   | Public Testnet | https://ethereum-sepolia-rpc.publicnode.com |
 | `amoy`      | Amoy      | Public Testnet | https://polygon-amoy-bor-rpc.publicnode.com |
 
-You may also connect to ant EVM-compatible network by setting the `ADHOC_TAR_JSON_RPC_URL` environment variable and using the `custom` network id during deployment.
+You may also connect to ant EVM-compatible network by setting the `TAR_JSON_RPC_URL` environment variable and using the `custom` network id during deployment.
 
 ### Contract Verification
 
@@ -151,7 +151,7 @@ To verify a contract with Sourcify, run:
 npm run verify:sourcify <network>
 ```
 
-To verify a contract with Etherscan, or Etherscan-like explorer, set the `ADHOC_TAR_ETHERSCAN_API_KEY` and `ADHOC_TAR_ETHERSCAN_URL` environment variables as appropriate, and run:
+To verify a contract with Etherscan, or Etherscan-like explorer, set the `TAR_ETHERSCAN_API_KEY` and `TAR_ETHERSCAN_URL` environment variables as appropriate, and run:
 
 ```shell
 npm run verify:etherscan <network>
