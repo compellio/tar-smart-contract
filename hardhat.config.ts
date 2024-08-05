@@ -19,14 +19,16 @@ dotenv.config();
 const {
     ADHOC_TAR_DEPLOYER_KEY,
     ADHOC_TAR_OWNER,
-    ADHOC_TAR_PREFIX,
-    ADHOC_TAR_POSTFIX,
+    ADHOC_TAR_URI_PREFIX,
+    ADHOC_TAR_URI_POSTFIX,
     ADHOC_TAR_JSON_RPC_URL,
-    ADHOC_TAR_SAVE_DEPLOYMENT
+    ADHOC_TAR_SAVE_DEPLOYMENT,
+    ADHOC_TAR_ETHERSCAN_URL,
+    ADHOC_TAR_ETHERSCAN_API_KEY
 } = process.env;
 
-if (!ADHOC_TAR_PREFIX) {
-    throw Error("ADHOC_TAR_PREFIX is not set");
+if (!ADHOC_TAR_URI_PREFIX) {
+    throw Error("ADHOC_TAR_URI_PREFIX is not set");
 }
 
 const sharedNetworkConfig: HttpNetworkUserConfig = {};
@@ -45,8 +47,16 @@ if (ADHOC_TAR_SAVE_DEPLOYMENT === "true") {
     sharedNetworkConfig.saveDeployments = true;
 }
 
-if (ADHOC_TAR_JSON_RPC_URL) {
-    sharedNetworkConfig.url = ADHOC_TAR_JSON_RPC_URL;
+if (ADHOC_TAR_ETHERSCAN_API_KEY) {
+    sharedNetworkConfig.verify = {
+        etherscan: {
+            apiKey: ADHOC_TAR_ETHERSCAN_API_KEY
+        }
+    }
+
+    if (ADHOC_TAR_ETHERSCAN_URL) {
+        sharedNetworkConfig.verify.etherscan!.apiUrl = ADHOC_TAR_ETHERSCAN_URL
+    }
 }
 
 const config: HardhatUserConfig & AdHocTarConfig = {
@@ -79,10 +89,20 @@ const config: HardhatUserConfig & AdHocTarConfig = {
             ...sharedNetworkConfig,
         }
     },
+    etherscan: {
+        apiKey: ADHOC_TAR_ETHERSCAN_API_KEY
+    },
     tar: {
-        prefix: ADHOC_TAR_PREFIX,
-        postfix: ADHOC_TAR_POSTFIX ?? ""
+        prefix: ADHOC_TAR_URI_PREFIX,
+        postfix: ADHOC_TAR_URI_POSTFIX ?? ""
     }
 };
+
+if (ADHOC_TAR_JSON_RPC_URL) {
+    config.networks!.custom = {
+        ...sharedNetworkConfig,
+        url: ADHOC_TAR_JSON_RPC_URL
+    }
+}
 
 export default config;
