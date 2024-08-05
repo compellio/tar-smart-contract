@@ -162,3 +162,5 @@ npm run verify:etherscan <network>
 <img src="./assets/images/ngi-search.png" height="40" alt="NGI Search">
 
 Funded by the European Union. Views and opinions expressed are those of the author(s) only and don’t necessarily reflect those of the European Union or European Commission. Neither the European Union nor the granting authority can be held responsible for them. Funded within the framework of the [NGI Search project](https://www.ngisearch.eu/) under grant agreement No 101069364.
+
+Documentation for NGI Search Milestone 3 is available [here](./docs/ngi-search/milestone-3).
