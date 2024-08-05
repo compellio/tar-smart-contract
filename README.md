@@ -75,14 +75,14 @@ npm run clean
 To retrieve the canonical representation of a JSON string (as defined in [RFC8785](https://www.rfc-editor.org/rfc/rfc8785.html)), run either of the following (the script accepts JSON strings in stdin):
 
 ```shell
-npx canonicalize < filename.json
-cat filename.json | npx canonicalize
+npx json-canonicalize < filename.json
+cat filename.json | npx json-canonicalize
 ```
 
 Once canonicalized, you can generate a hash using `shasum` or other similar hashing commands. For example, to generate a SHA256 hash for a canonicalized JSON file, you can run:
 
 ```shell
-cat filename.json | npx canonicalize | shasum -a 256
+cat ./path/to/filename.json | npx json-canonicalize | shasum -a 256
 ```
 
 The output can be used to create versions with the deployed smart contract.

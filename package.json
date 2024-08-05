@@ -9,7 +9,7 @@
     "json:canonicalize": "canonicalize"
   },
   "bin": {
-    "canonicalize": "scripts/canonicalize.js"
+    "json-canonicalize": "scripts/canonicalize.js"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
