@@ -1,5 +1,5 @@
 {
-  "name": "adhoc-tar-toolkit",
+  "name": "tar-smart-contract",
   "scripts": {
     "build": "hardhat compile",
     "clean": "hardhat clean",
