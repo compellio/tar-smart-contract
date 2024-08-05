@@ -16,7 +16,7 @@ nvm install && nvm use
 npm ci
 ```
 
-If you don't have NVM installed (see https://github.com/nvm-sh/nvm), make sure you are on Node v20.x to run the commands below.
+If you don't have NVM installed (see <https://github.com/nvm-sh/nvm>), make sure you are on Node v20.x to run the commands below.
 
 Continue reading the [Environment Variables](#environment-variables) section to configure your installation as needed.
 
@@ -80,7 +80,7 @@ npm run clean
 
 ### JSON Canonicalization
 
-This project provides a simple executable script for getting the canonical representation of arbitrary JSON strings, as defined in [RFC 8785](https://www.rfc-editor.org/rfc/rfc8785.html).
+This project provides a simple executable script for getting the canonical representation of arbitrary JSON strings, as defined in [RFC 8785](https://datatracker.ietf.org/doc/html/rfc8785).
 
 To get the canonical representation of a JSON string, run either of the following commands:
 
@@ -163,4 +163,4 @@ npm run verify:etherscan <network>
 
 Funded by the European Union. Views and opinions expressed are those of the author(s) only and don’t necessarily reflect those of the European Union or European Commission. Neither the European Union nor the granting authority can be held responsible for them. Funded within the framework of the [NGI Search project](https://www.ngisearch.eu/) under grant agreement No 101069364.
 
-Documentation for NGI Search Milestone 3 is available [here](./docs/ngi-search/milestone-3).
+Documentation for NGI Search Milestone 3 is available [here](./docs/ngi-search/milestone-3.md).
