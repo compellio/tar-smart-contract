@@ -5,8 +5,10 @@
     "clean": "hardhat clean",
     "node": "hardhat node",
     "node:blank": "hardhat node --no-deploy",
-    "deploy": "hardhat deploy",
-    "json:canonicalize": "canonicalize"
+    "deploy": "hardhat deploy --network",
+    "deploy:fresh": "hardhat deploy --reset --network",
+    "verify:sourcify": "hardhat sourcify --network",
+    "verify:etherscan": "hardhat etherscan-verify --network"
   },
   "bin": {
     "json-canonicalize": "scripts/canonicalize.js"
