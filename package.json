@@ -1,5 +1,6 @@
 {
   "name": "tar-smart-contract",
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "build": "hardhat compile",
     "clean": "hardhat clean",
