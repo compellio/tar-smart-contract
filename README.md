@@ -11,7 +11,7 @@ The [`TAR`](./contracts/TAR.sol) contract provides an early reference implementa
 To install the repository and its dependencies, run:
 
 ```shell
-git clone https://github.com/compellio/adhoc-tar-toolkit
+git clone https://github.com/compellio/tar-smart-contract
 nvm install && nvm use
 npm ci
 ```
@@ -31,6 +31,8 @@ The following variables affect the deployed TAR contract:
 - `TAR_OWNER=<address|int>` the account address to assign as the TAR owner (required). If set to `0`, the deployer account will be assigned as the owner.
 - `TAR_URI_PREFIX=<string>` the beginning of a URI used to generate TAR data URIs (required, e.g.: `https://example.org/asset`). The URL mustn’t contain trailing slashes.
 - `TAR_URI_POSTFIX=<string|null>` a string to append to the TAR data URI (optional - defaults to an empty string, e.g.: `.json`).
+
+The account set in `TAR_OWNER` will be able to push new versions to the deployed contract. The owner may also transfer or renounce their ownership.
 
 The TAR contract will use `TAR_URI_PREFIX` and `TAR_URI_POSTFIX` to produce the following data URI for each version it stores:
 
@@ -156,6 +158,8 @@ To verify a contract with Etherscan, or Etherscan-like explorer, set the `TAR_ET
 ```shell
 npm run verify:etherscan <network>
 ```
+
+Both verification commands will verify the last deployed contract. If you plan to verify your deployed contract, set the `TAR_SAVE_DEPLOYMENT` environment variable to true.
 
 ## About
 

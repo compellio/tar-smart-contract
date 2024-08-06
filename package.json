@@ -9,7 +9,7 @@
     "deploy": "hardhat deploy --network",
     "deploy:fresh": "hardhat deploy --reset --network",
     "verify:sourcify": "hardhat sourcify --network",
-    "verify:etherscan": "hardhat etherscan-verify --network"
+    "verify:etherscan": "hardhat etherscan-verify --license None --force-license --network"
   },
   "bin": {
     "json-canonicalize": "scripts/canonicalize.js"
