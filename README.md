@@ -174,10 +174,18 @@ npx jsonld-cli canonize --base examples/ examples/velvet-jewelry-box.json
 npx jsonld-cli canonize --base examples/profiles/domains/culture/ examples/profiles/domains/culture/dcap.json
 ```
 
-## About
+## NGI Search
 
+NGI Search is about making search queries on data and information that have been authenticated by their corresponding publisher. For this authentication/signing process, the blockchain and smart contract technologies are being used.
+
+### Blockchain
+Blockchain is increasingly gaining importance not only as a siloed technology for implementing on-chain dApps but also as an infrastructure element in the global internet-based computing landscape. In particular, the ability to uniquely identify assets allows easier implementation of traceability and auditability in any tokenisation process, thus increasing trust and transparency regarding products and processes involving these - physical or digital - assets.
+
+### Tokenized information
+Using the blockchain technology, information is being tokenized (as a means of proving its authenticity) and hashed (in order to prevent it from being tampered with). These pieces of information (also called assets) can be retrieved and updated on demand, retaining all the change history which can later be retrieved using a corresponding version number.
+This tokenized information (or Tokenized Asset Record - TAR) comprises the building blocks of information that NGI Search can search on, using a typed manner.
+
+<br/>
 <img src="./assets/images/ngi-search.png" height="40" alt="NGI Search">
 
 Funded by the European Union. Views and opinions expressed are those of the author(s) only and don’t necessarily reflect those of the European Union or European Commission. Neither the European Union nor the granting authority can be held responsible for them. Funded within the framework of the [NGI Search project](https://www.ngisearch.eu/) under grant agreement No 101069364.
-
-Documentation for NGI Search Milestone 3 is available [here](./docs/ngi-search/milestone-3.md).
