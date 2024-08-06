@@ -1,4 +1,3 @@
-#! /usr/bin/env node
 /*
  * Tokenized Asset Record (TAR) Smart Contracts
  * Copyright (C) 2024  Compellio S.A.
@@ -17,17 +16,24 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-const fs = require("fs");
-const canonicalize = require('canonicalize');
+import {DeployFunction} from "hardhat-deploy/types";
+import {HardhatRuntimeEnvironment} from "hardhat/types";
+import config from "../hardhat.config";
 
-try {
-    const input = fs.readFileSync(0).toString();
-    const json = JSON.parse(input);
-    const canonical = canonicalize(json);
+const deploy: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
-    console.log(canonical);
+    const {deployments, getNamedAccounts} = hre;
+    const {deployer, owner} = await getNamedAccounts();
+    const {deploy} = deployments;
 
-} catch (e) {
-    console.error("An error occurred")
-    console.error(e)
+    await deploy("TAR", {
+        from: deployer,
+        args: [owner, config.tar.prefix, config.tar.postfix],
+        skipIfAlreadyDeployed: false,
+        log: true
+    });
+
 }
+
+deploy.tags = ["tar", "main"];
+export default deploy;

@@ -1,4 +1,3 @@
-#! /usr/bin/env node
 /*
  * Tokenized Asset Record (TAR) Smart Contracts
  * Copyright (C) 2024  Compellio S.A.
@@ -17,17 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-const fs = require("fs");
-const canonicalize = require('canonicalize');
-
-try {
-    const input = fs.readFileSync(0).toString();
-    const json = JSON.parse(input);
-    const canonical = canonicalize(json);
-
-    console.log(canonical);
-
-} catch (e) {
-    console.error("An error occurred")
-    console.error(e)
+interface TarConfig {
+    tar: {
+        prefix: string;
+        postfix?: string;
+    }
 }

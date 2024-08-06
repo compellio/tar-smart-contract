@@ -1,21 +1,35 @@
 {
-  "name": "adh-mggovgr-dcap-tar",
+  "name": "tar-smart-contract",
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "build": "hardhat compile",
     "clean": "hardhat clean",
-    "deploy": "thirdweb deploy --contract TAR",
-    "json:canonicalize": "canonicalize"
+    "node": "hardhat node",
+    "node:blank": "hardhat node --no-deploy",
+    "deploy": "hardhat deploy --network",
+    "deploy:fresh": "hardhat deploy --reset --network",
+    "verify:sourcify": "hardhat sourcify --network",
+    "verify:etherscan": "hardhat etherscan-verify --license None --force-license --network"
   },
   "bin": {
-    "canonicalize": "scripts/canonicalize.js"
+    "json-canonicalize": "scripts/canonicalize.js"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
-    "hardhat": "^2.22.1",
-    "thirdweb": "^0.13.51"
+    "@openzeppelin/contracts": "^5.0.2",
+    "@types/chai": "^4.3.16",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^20.14.10",
+    "@types/yargs": "^17.0.32",
+    "chai": "^4.4.1",
+    "dotenv": "^16.4.5",
+    "hardhat": "^2.22.6",
+    "hardhat-deploy": "^0.12.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3",
+    "yargs": "^17.7.2"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^5.0.2",
     "canonicalize": "^2.0.0"
   }
 }
