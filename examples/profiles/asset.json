@@ -1,0 +1,12 @@
+{
+	"@context": {
+		"@version": 1.1,
+		"@protected": true,
+		"schema": "https://schema.org/",
+		"asset": "urn:example:asset/",
+		"title": {
+			"@id": "asset:title",
+			"@type": "schema:Text"
+		}
+	}
+}

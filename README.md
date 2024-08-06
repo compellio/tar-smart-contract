@@ -161,6 +161,19 @@ npm run verify:etherscan <network>
 
 Both verification commands will verify the last deployed contract. If you plan to verify your deployed contract, set the `TAR_SAVE_DEPLOYMENT` environment variable to true.
 
+## TAR Payload Examples
+
+This project features some TAR payload examples that can be used when deploying TAR contracts.
+
+### JSON-LD Manipulations
+
+The TAR example payloads can be manipulated using the <https://github.com/digitalbazaar/jsonld-cli> tool, for example:
+
+```shell
+npx jsonld-cli canonize --base examples/ examples/velvet-jewelry-box.json
+npx jsonld-cli canonize --base examples/profiles/domains/culture/ examples/profiles/domains/culture/dcap.json
+```
+
 ## About
 
 <img src="./assets/images/ngi-search.png" height="40" alt="NGI Search">

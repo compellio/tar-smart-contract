@@ -1,0 +1,33 @@
+{
+	"@context": [
+		"./profiles/asset.json",
+		"./profiles/domains/culture/dcap.json"
+	],
+	"title": "Blue Velvet Jewelry Box",
+	"dcap": {
+		"rwa": {
+			"digital_carrier_id": "E492069BT491278256346325",
+			"digital_carrier_type": "rfid_tag",
+			"rwa_kind": {
+				"en": "Various cases"
+			},
+			"rwa_description": {
+				"en": "Blue velvet jewelry box with fabric lining on the inside. The metal edges in gold colour can be seen at the application point of the hinged cover. Veinoglou: 161"
+			},
+			"rwa_current_storage": {
+				"en": "Former Royal Estate Tatoi > Stavlos (Old Vustassio)"
+			},
+			"rwa_storage_location": {
+				"en": "Former Royal Estate Tatoi > House Tatoi-1 (1000 sq.m.), Box XX"
+			}
+		},
+		"dcar": {
+			"dar_id": "911024",
+			"dar_system_id": "5TDYIU",
+			"dar_url": "https://example.org/doi/5TDYIU/911024",
+			"dar_description": {
+				"en": "Blue velvet jewelry box with fabric lining inside."
+			}
+		}
+	}
+}

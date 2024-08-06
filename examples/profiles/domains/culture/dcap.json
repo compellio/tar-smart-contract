@@ -1,0 +1,73 @@
+{
+	"@id": "urn:example:profile:dcap",
+	"@context": [
+		"./../../asset.json",
+		{
+			"@version": 1.1,
+			"@protected": true,
+			"schema": "https://schema.org/",
+			"profile": "urn:example:profile:dcap/",
+			"dcap": {
+				"@id": "urn:example:profile:dcap",
+				"@context": {
+					"rwa": {
+						"@id": "profile:rwa",
+						"@context": {
+							"digital_carrier_id": {
+								"@id": "profile:rwa#digital_carrier_id",
+								"@type": "schema:Text"
+							},
+							"digital_carrier_type": {
+								"@id": "profile:rwa#digital_carrier_type",
+								"@type": "schema:Text"
+							},
+							"rwa_kind": {
+								"@id": "profile:rwa#rwa_kind",
+								"@container": "@language",
+								"@type": "schema:Text"
+							},
+							"rwa_description": {
+								"@id": "profile:rwa#rwa_description",
+								"@container": "@language",
+								"@type": "schema:Text"
+							},
+							"rwa_current_storage": {
+								"@id": "profile:rwa#rwa_current_storage",
+								"@container": "@language",
+								"@type": "schema:Text"
+							},
+							"rwa_storage_location": {
+								"@id": "profile:rwa#rwa_storage_location",
+								"@container": "@language",
+								"@type": "schema:Text"
+							}
+						}
+					},
+					"dar": {
+						"@id": "profile:dar",
+						"@context": {
+							"dar_id": {
+								"@id": "profile:dar#dar_id",
+								"@type": "schema:Text"
+							},
+							"dar_system_id": {
+								"@id": "profile:dar#dar_system_id",
+								"@type": "schema:Text"
+							},
+							"dar_url": {
+								"@id": "profile:dar#dar_url",
+								"@type": "schema:URL"
+							},
+							"dar_description": {
+								"@id": "profile:dar#dar_description",
+								"@container": "@language",
+								"@type": "schema:Text"
+							}
+						}
+					}
+				}
+			}
+		}
+	],
+	"title": "DCAP Asset Profile"
+}
